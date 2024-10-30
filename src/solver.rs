@@ -2,7 +2,13 @@ use crate::interface::*;
 use crate::mutex_like::*;
 use crate::sliceop::*;
 use crate::utility::*;
+use std::fs::File;
 use std::io::{self, Write};
+fn save_results_to_file(results: &str) -> io::Result<()> {
+    let mut file = File::create("solver_output.txt")?;
+    file.write_all(results.as_bytes())?;
+    Ok(())
+}
 use std::mem::MaybeUninit;
 
 #[cfg(feature = "custom-alloc")]
